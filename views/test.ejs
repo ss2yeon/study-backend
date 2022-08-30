@@ -1,42 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <div style="background-color: red; color: white;">fhfghgfhello express222</div>
-    <img src="/static/img/apple.jpg">
-    <a href="/test">이동</a>
-    <table border="1" >
-        <tr>
-            <td>
-                이름
-            </td>
-            <td>
-                성별
-            </td>
-        </tr>
-        <% for(var i=0; i<per.length; i++) { %>
-            <tr>
-                <td>
-                    <%=per[i]["name"]%>
-                </td>
-                <td>
-                    <%=per[i]["gender"]%>
-                </td>
-            </tr>
-        <% } %>
-    </table>
+    <head>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.0.min.js" ></script>
+        <style>
+            .select:hover, .select_country:hover{
+                cursor:pointer;
+            }
+            .content{
+                height:0;
+                overflow-y: hidden;
+                cursor: auto;
+                transition:1s;
+                background-color: aqua;
+            }
 
-    <% for(var i=0; i<5; i++) { %>
-        <div>안녕하세요<%=i%></div>
-    <% } %>
+        </style>
+    </head>
+    
+    <body>
+        <div class="container">
+          <div>
+            <div class="select">국내 맥주</div>
+            <div class="content">
+                <div>하이트 엑스트라 콜드(hite EXTRA COLD)</div>
+                <div>맥스(Max)</div>
+                <div>드라이 d</div>
+                <div>하이트 스타우트(BLACK stout)</div>
+                <div>퀸즈 에일(QUEEN'S ALE)</div>
+                <div>테라(TERRA)</div>
+                <div>더 프리미어 OB</div>
+                <div>카스(Cass)</div>
+                <div>카프리</div>
+                <div>한맥(HANMAC)</div>
+                <div>클라우드(Kloud)</div>
+                <div>피츠 수퍼 클리어(Fitz Super Clear)</div>
+            </div>
+          </div>
+          <div>
+            <div class="select">수입 맥주</div>
+            <div class="content">
+                <div class="select select_country">독일</div>
+                <div class="content">
+                    <div>벡스(Beck's)</div>
+                    <div>파울라너(Paulaner)</div>
+                    <div>바이엔슈테판(Weihenstephan)</div>
+                    <div>외팅어(Oettinger)</div>
+                    <div>에어딩어(erdinger)</div>
+                    <div>크롬바허(Krombacher)</div>
+                    <div>바슈타이너(Warsteiner)</div>
+                    <div>뢰벤브로이(Löwenbräu)</div>
+                    <div>답(DAB)</div>
+                    <div>디벨스 알트(Diebels Alt)</div>
+                    <div>비트부어거(Bitburger)</div>
+                    <div>슈나이더(Schineider)</div>
+                    <div>슈무커(Schmucker)</div>
+                </div>
+                <div class="select select_country">체코</div>
+                <div class="content">
+                    <div>필스너 우르켈(Pilsner Urquell)</div>
+                    <div>코젤(Kozel)</div>
+                    <div>스타로프라멘(Staropramen)</div>
+                </div>
+                <div class="select select_country">벨기에</div>
+                <div class="content">
+                    <div>스텔라 아르투아 (Stella Artois)</div>
+                    <div>호가든 (Hoegaarden)</div>
+                    <div>레페 (Leffe)</div>
+                    <div>듀벨 (Duvel)</div>
+                    <div>주필러 (Jupiler)</div>
+                    <div>블랑슈 드 브뤼셀 (Blanche De Bruxelles)</div>
+                </div>
+                <div class="select select_country">네덜란드</div>
+                <div class="content">
+                    <div id="childrennether">
+                    <div>하이네켄(Heineken)</div>
+                    <div>그롤쉬(Grolsch)</div>
+                    <div>데스페라도스(Desperados)</div>
+                    <div>로얄 더치(Royal Dutch)</div>
+                </div>
+            </div>
+          </div>
+        </div>
+      <script>
+        $(".select").click(function(){
+            var list_box = $(this).next();
+            var list = $(list_box).children().not(".content");
 
-    <%-include("test1.ejs")%>
-    <script>
-    </script>
-</body>
+            var list_height = $(list[0]).height();
+            var list_count = list.length;
+            var total_heigth = list_count * list_height;
+            console.log(list,list_height,list_count)
+
+            if($(list_box).css("height") == "0px"){
+                $(list_box).css("height", total_heigth);
+
+                if($(this).hasClass("select_country")){
+                    var parent = $(this).parent();
+                    $(parent).css("height", $(parent).height()+total_heigth);
+                }
+            } else {
+                $(list_box).css("height", "0px");
+
+                if($(this).hasClass("select_country")){
+                    var parent = $(this).parent();
+                    $(parent).css("height", $(parent).height()-total_heigth);
+                }
+            }
+        })
+      </script>
+      </body>
 </html>
