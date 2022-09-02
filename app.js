@@ -4,6 +4,8 @@ app.set("view engine", "ejs")
 app.use("/static", express.static("static"))
 const port = 8000;
 
+
+
 app.get("/", (req,res)=>{
     var person = [
         { name: "김소연", gender: "여자" }, 
